@@ -1,3 +1,4 @@
+#include<array>
 #include<iostream>
 
 template<class T, class... Ts>
@@ -28,11 +29,25 @@ constexpr auto find_index() -> std::size_t
 template<class T>
 struct type 
 {
-    static void id();
+    static void id() {}
 };
 
 template<class T> 
 inline constexpr auto meta = type<T>::id;
+
+template<typename T, typename... Ts>
+std::size_t find_vb()
+{
+    std::array ts{meta<Ts>...};
+    for(auto i = 0u; i != ts.size(); ++i)
+    {
+        if(ts[i] == meta<T>)
+        {
+            return i;
+        }
+    }
+    return ts.size();
+}
 
 int main()
 {
@@ -42,5 +57,6 @@ int main()
 
     static_assert(meta<int> != meta<void>);
     static_assert(meta<char> == meta<char>);
+    std::cout << find_vb<int, char, float, double, int>() << std::endl; 
     return 0;
 }

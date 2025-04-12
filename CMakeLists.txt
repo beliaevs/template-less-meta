@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 4.0)
+project(template-less-meta CXX)
+add_executable(template-less-meta main.cpp)
+set_target_properties(template-less-meta PROPERTIES CXX_STANDARD 17)
+set_target_properties(template-less-meta PROPERTIES CXX_STANDARD_REQUIRED YES)
